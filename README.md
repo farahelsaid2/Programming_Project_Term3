@@ -15,3 +15,7 @@ typedef struct
     char mobile[12];
     char status[20];
 } info;
+
+
+To call search --> Search(0,"account number");
+To call load --> LOAD(the number of needed line);
