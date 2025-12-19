@@ -1,14 +1,17 @@
-typedef struct {
-   char *month;
+typedef struct
+{
+    int month;
     int year;
-}dateOpened;
+} dateOpened;
 
 
-typedef struct{
-    int accNumber;
-    char *name;
-    char *email;
+typedef struct
+{
+    char accNumber[50];
+    char name[50];
+    char email[50];
     double balance;
     dateOpened date;
-    int mobile;
-}info
+    char mobile[12];
+    char status[20];
+} info;
