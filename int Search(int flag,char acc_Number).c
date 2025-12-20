@@ -45,22 +45,29 @@ void printDate(info acc)
 }
 
 
+
+
+
 int Search(int flag,char acc_Number[50]) //if any function need to search only call by (0,acc_number)
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
     char s[250];
     char searchNum[50];
+    char buffer[50];
     char *token;
     int index =0;
     int foundIndex = -1;
-    if(strcmp(acc_Number, "1") == 0)
+    strcpy(buffer,acc_Number);
+    trim(buffer);
+    if(strcmp(buffer,"1") == 0)
 
     {
         printf("Enter the account number:");
-        fgets(acc_Number, sizeof(acc_Number), stdin);
-        trim(acc_Number);
+        fgets(buffer,50, stdin);
+        trim(buffer);
     }
+
 
     FILE *fr=fopen("accounts.txt","r");
 
@@ -77,7 +84,7 @@ int Search(int flag,char acc_Number[50]) //if any function need to search only c
         strcpy(searchNum,token);
         trim(searchNum);
 
-        if (strcmp(acc_Number,searchNum) == 0)
+        if (strcmp(buffer,searchNum) == 0)
         {
             foundIndex = index;
             break;
@@ -109,7 +116,7 @@ int Search(int flag,char acc_Number[50]) //if any function need to search only c
         printf("Balance : %.2f\n",acc.balance);
         printf("Mobile: %s\n",acc.mobile);
         printDate(acc);
-        if(strcmp(acc.status," active")==0)
+        if(strcmp(acc.status,"active")==0)
         {
             SetConsoleTextAttribute(hConsole, 2);
             printf("Status: %s\n",acc.status);
