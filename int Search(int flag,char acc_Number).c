@@ -101,7 +101,7 @@ int Search(int flag,char acc_Number[50]) //if any function need to search only c
         printf("Account not found");
         SetConsoleTextAttribute(hConsole, 7);   // default
 
-        return 0;
+        return -1;
     }
 
     if(flag)
@@ -133,6 +133,6 @@ int Search(int flag,char acc_Number[50]) //if any function need to search only c
 
     }
 
-    return 1;
+    return foundIndex;
 
 }
