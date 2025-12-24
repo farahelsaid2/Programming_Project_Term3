@@ -10,21 +10,22 @@ int transfer() {
     SetConsoleTextAttribute(hConsole, 3);
     printf("Enter the sender account number: ");
     fgets(saccno, sizeof(saccno), stdin);
-    sacc = LOAD(Search(0, saccno));
+    int search = Search(0, saccno);
+    sacc = LOAD(search);
     saccno[strcspn(saccno, "\n")] = '\0';
     snprintf(sfilename, sizeof(sfilename), "%s.txt", saccno);    
-    if (Search(0, saccno) == -1) {
-        SetConsoleTextAttribute(hConsole, 12);
+    if (search == -1) {
+       /* SetConsoleTextAttribute(hConsole, 12);
         printf("Please enter a valid account number \n");
         SetConsoleTextAttribute(hConsole, 7);
-        transfer();
+        transfer(); */
     } else {
         if (strcmp(sacc.status, "inactive") == 0) {
             SetConsoleTextAttribute(hConsole, 12);
             printf("The sender account is not active! \n");
-            printf("Please enter a valid account number\n");
+            /* printf("Please enter a valid account number\n");
             SetConsoleTextAttribute(hConsole, 7);
-            transfer();
+            transfer(); */
         } else {
             SetConsoleTextAttribute(hConsole, 3);
             printf("Enter the ammount of money you want to transfer: ");
@@ -34,17 +35,18 @@ int transfer() {
             if (sacc.balance < t) {
                 SetConsoleTextAttribute(hConsole, 12);
                 printf("There is no enough balance to transfer this ammount \n");
-                printf("Please enter a valid amount \n");
+                /* printf("Please enter a valid amount \n");
                 SetConsoleTextAttribute(hConsole, 7);
-                transfer();
+                transfer(); */
             } else { 
                 SetConsoleTextAttribute(hConsole, 3);
                 printf("Enter the reciver account number: ");
                 fgets(raccno, sizeof(raccno), stdin);
-                racc = LOAD(Search(0, raccno));
+                int searchR = Search(0, raccno);
+                racc = LOAD(searchR);
                 raccno[strcspn(raccno, "\n")] = '\0';
                 snprintf(rfilename, sizeof(rfilename), "%s.txt", raccno);    
-                if (Search(0, raccno) == -1) {
+                if (searchR == -1) {
                     SetConsoleTextAttribute(hConsole, 12);
                     printf("Please enter a valid account number \n");
                     SetConsoleTextAttribute(hConsole, 7);
@@ -53,14 +55,14 @@ int transfer() {
                     if (strcmp(racc.status, "inactive") == 0) {
                         SetConsoleTextAttribute(hConsole, 12);
                         printf("The reciver account is not active! \n");
-                        printf("Please enter a valid account number");
+                       /* printf("Please enter a valid account number");
                         SetConsoleTextAttribute(hConsole, 7);
-                        transfer();
+                        transfer(); */
                     }
                     if (Save(&racc,t,&sacc,t) == 1) {   
                         sacc.balance -= t;
                         racc.balance += t;
-                        LOAD(Search(0, saccno));
+                        LOAD(search);
                         sptr = fopen(sfilename, "a");
                         rptr = fopen(rfilename, "a");
                         if (!sptr || !rptr) {

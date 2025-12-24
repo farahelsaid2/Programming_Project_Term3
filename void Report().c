@@ -4,6 +4,7 @@ void Report()
     int j,c;
     int k =0;
     int counter = 0;
+    int flag = 0;
     double dollars;
     char *token;
     char filename[50];
@@ -68,6 +69,7 @@ void Report()
                 printf("Deposit: ");
                 SetConsoleTextAttribute(hConsole, 7);
                 printf("%.2lf\n",dollars);
+                flag = 0;
             }
 
            else if(strcmp(operation,"W") == 0)
@@ -76,6 +78,8 @@ void Report()
                 printf("Withdrawal: ");
                 SetConsoleTextAttribute(hConsole, 7);
                 printf("%.2lf\n",dollars);
+                flag = 0;
+
             }
 
            else if(strcmp(operation,"TT") == 0)
@@ -86,6 +90,8 @@ void Report()
                 printf("transfered: ");
                 SetConsoleTextAttribute(hConsole, 7);
                 printf("%.2lf\n",dollars);
+                flag = 0;
+
             }
 
            else if(strcmp(operation,"RF") == 0)
@@ -96,12 +102,21 @@ void Report()
                 printf("recieved: ");
                 SetConsoleTextAttribute(hConsole, 7);
                 printf("%.2lf\n",dollars);
+                flag = 0;
+
             }
 
 
 
 
+
     }
+                if(flag)
+                {
+                    SetConsoleTextAttribute(hConsole, 12);
+                    printf("No transactions made yet");
+                    SetConsoleTextAttribute(hConsole, 7);
+                }
                 SetConsoleTextAttribute(hConsole, 2);
                 printf("\nTotal Balance: ");
                 SetConsoleTextAttribute(hConsole, 7);
