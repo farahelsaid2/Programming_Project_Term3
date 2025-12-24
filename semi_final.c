@@ -51,6 +51,7 @@ info* sortByName(int count);
 info* sortByBalance(int count);
 info* sortByDateOpened(int count);
 info* sortByStatus(int count);
+int compareByName(const void *a, const void *b)
 
 int main()
 {
@@ -987,6 +988,7 @@ void PRINT()
             printf("\n");
         }
     }
+    free(acc);
 }
 
 void printDate(info acc)
@@ -1055,40 +1057,35 @@ void trim(char *s)
         memmove(s, s + start, len - start + 1); // +1 for '\0'
 }
 
+int compareByName(const void *a, const void *b)
+{
+    const info *acc1 = (const info *)a;
+    const info *acc2 = (const info *)b;
+
+    return strcasecmp(acc1->name, acc2->name);
+}
+
 info* sortByName(int count)
 {
-    info *accounts = malloc(sizeof(info) * (count));
+    info *accounts = malloc(sizeof(info) * count);
     if (!accounts)
     {
         printf("Memory allocation failed\n");
         exit(1);
     }
 
-    // Load each account
+    // Load accounts
     for (int i = 0; i < count; i++)
     {
         accounts[i] = LOAD(i);
     }
 
-    // Sort by names
-    for (int i = 0; i < count - 1; i++)
-    {
-        for (int j = 0; j < count - i - 1; j++)
-        {
-            char c1 = toupper(accounts[j].name[0]);
-            char c2 = toupper(accounts[j + 1].name[0]);
-
-            if (c1 > c2)
-            {
-                info tempAcc = accounts[j];
-                accounts[j] = accounts[j + 1];
-                accounts[j + 1] = tempAcc;
-            }
-        }
-    }
+    // Sort by name
+    qsort(accounts, count, sizeof(info), compareByName);
 
     return accounts;
 }
+
 
 info* sortByBalance(int count)
 {
